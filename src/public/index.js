@@ -1,8 +1,8 @@
 $(document).ready(function(){
     // Initiating our Auth0Lock
     let lock = new Auth0Lock(
-        'Gqi3Wm43FPzMbOgg5ZdPE2k4BhOQo8AB',
-        'pmbanugo.eu.auth0.com',
+        'Client_ID',
+        'DOMAIN',
         {
             auth: {
                 //redirectUrl: 'http://localhost:5000',
