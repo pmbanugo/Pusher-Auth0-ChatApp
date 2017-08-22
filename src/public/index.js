@@ -1,8 +1,8 @@
 $(document).ready(function(){
     // Initiating our Auth0Lock
     let lock = new Auth0Lock(
-        'Gqi3Wm43FPzMbOgg5ZdPE2k4BhOQo8AB',
-        'pmbanugo.eu.auth0.com',
+        'CLIENT_ID',
+        'CLIENT_DOMAIN',
         {
             auth: {
                 //redirectUrl: 'http://localhost:5000',
@@ -37,9 +37,30 @@ $(document).ready(function(){
     let profile = JSON.parse(localStorage.getItem('profile'));
     let isAuthenticated = localStorage.getItem('isAuthenticated');
 
-    let updateValues = (userProfile, authStatus) => {
+    function updateValues(userProfile, authStatus) {
         profile = userProfile;
         isAuthenticated = authStatus;
+    }
+
+    $("#logout").click((e) => {
+        e.preventDefault();
+        logout();
+    });
+
+    function logout(){
+        localStorage.clear();
+        isAuthenticated = false;
+        lock.logout({ 
+            returnTo: "http://localhost:5000" 
+        });
+    }
+    
+    function onMessageAdded(data) {
+        let template = $("#new-message").html();
+        template = template.replace("{{body}}", data.message);
+        template = template.replace("{{name}}", data.name);
+
+        $(".chat").append(template);
     }
 
     if(!isAuthenticated && !window.location.hash){
@@ -53,47 +74,19 @@ $(document).ready(function(){
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('da857397f8eec3092630', {
+        var pusher = new Pusher('APP_SECRET', {
             cluster: 'eu',
             encrypted: false
         });
 
-        // var pusher = new Pusher('APP_SECRET', {
-        //     cluster: 'eu',
-        //     encrypted: false
-        // });
-
-        var channel = pusher.subscribe('public-chat');
+        var channel = pusher.subscribe('private-chat');
         channel.bind('message-added', onMessageAdded);
 
         $('#btn-chat').click(function(){
             const message = $("#message").val();
             $("#message").val("");
-
-            console.log(profile);
-            console.log(isAuthenticated)
-
-            //send message
+             //send message
             $.post( "http://localhost:5000/message", { message, name: profile.name } );
-        });
-
-        function onMessageAdded(data) {
-            let template = $("#new-message").html();
-            template = template.replace("{{body}}", data.message);
-            template = template.replace("{{name}}", data.name);
-
-            $(".chat").append(template);
-        }
-
-        $("#logout").click((e) => {
-            e.preventDefault();
-
-            localStorage.clear();
-            isAuthenticated = false;
-
-            lock.logout({ 
-                returnTo: "http://localhost:5000" 
-            });
-        });
-    }    
+        });  
+    }
 });
