@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 var pusher = new Pusher({ appId: APP_ID, key: APP_KEY, secret:  APP_SECRET, cluster: eu });
+<<<<<<< HEAD
 
 app.post('/pusher/auth', function(req, res) {
   var socketId = req.body.socket_id;
@@ -14,6 +15,8 @@ app.post('/pusher/auth', function(req, res) {
   var auth = pusher.authenticate(socketId, channel);
   res.send(auth);
 });
+=======
+>>>>>>> origin/master
 
 app.post('/message', function(req, res) {
   var message = req.body.message;

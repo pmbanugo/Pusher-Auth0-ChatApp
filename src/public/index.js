@@ -1,8 +1,13 @@
 $(document).ready(function(){
     // Initiating our Auth0Lock
     let lock = new Auth0Lock(
+<<<<<<< HEAD
         'CLIENT_ID',
         'CLIENT_DOMAIN',
+=======
+        'Client_ID',
+        'DOMAIN',
+>>>>>>> origin/master
         {
             auth: {
                 //redirectUrl: 'http://localhost:5000',
@@ -87,6 +92,31 @@ $(document).ready(function(){
             $("#message").val("");
              //send message
             $.post( "http://localhost:5000/message", { message, name: profile.name } );
+<<<<<<< HEAD
         });  
     }
 });
+=======
+        });
+
+        function onMessageAdded(data) {
+            let template = $("#new-message").html();
+            template = template.replace("{{body}}", data.message);
+            template = template.replace("{{name}}", data.name);
+
+            $(".chat").append(template);
+        }
+
+        $("#logout").click((e) => {
+            e.preventDefault();
+
+            localStorage.clear();
+            isAuthenticated = false;
+
+            lock.logout({ 
+                returnTo: "http://localhost:5000" 
+            });
+        });
+    }    
+});
+>>>>>>> origin/master
