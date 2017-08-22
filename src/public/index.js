@@ -1,13 +1,8 @@
 $(document).ready(function(){
     // Initiating our Auth0Lock
     let lock = new Auth0Lock(
-<<<<<<< HEAD
         'CLIENT_ID',
         'CLIENT_DOMAIN',
-=======
-        'Client_ID',
-        'DOMAIN',
->>>>>>> origin/master
         {
             auth: {
                 //redirectUrl: 'http://localhost:5000',
@@ -34,7 +29,7 @@ $(document).ready(function(){
             localStorage.setItem('accessToken', authResult.accessToken);
             localStorage.setItem('profile', JSON.stringify(profile));
             localStorage.setItem('isAuthenticated', true);
-            updateValues(profile, true);
+            updateAuthenticationValues(profile, true);
             $("#username").html(profile.name);
         });
     });
@@ -42,7 +37,7 @@ $(document).ready(function(){
     let profile = JSON.parse(localStorage.getItem('profile'));
     let isAuthenticated = localStorage.getItem('isAuthenticated');
 
-    function updateValues(userProfile, authStatus) {
+    function updateAuthenticationValues(userProfile, authStatus) {
         profile = userProfile;
         isAuthenticated = authStatus;
     }
@@ -92,31 +87,6 @@ $(document).ready(function(){
             $("#message").val("");
              //send message
             $.post( "http://localhost:5000/message", { message, name: profile.name } );
-<<<<<<< HEAD
         });  
     }
 });
-=======
-        });
-
-        function onMessageAdded(data) {
-            let template = $("#new-message").html();
-            template = template.replace("{{body}}", data.message);
-            template = template.replace("{{name}}", data.name);
-
-            $(".chat").append(template);
-        }
-
-        $("#logout").click((e) => {
-            e.preventDefault();
-
-            localStorage.clear();
-            isAuthenticated = false;
-
-            lock.logout({ 
-                returnTo: "http://localhost:5000" 
-            });
-        });
-    }    
-});
->>>>>>> origin/master
