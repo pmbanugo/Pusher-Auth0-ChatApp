@@ -14,5 +14,5 @@ Sample application on building a chat app using Pusher.
 3. Signup and Create a new client with Single Page Application as the application type on Auth0
 4. In `index.js` copy and Replace the placeholders __APP_ID__, __APP_SECRET__, and __APP_KEY__, with the keys from your pusher dashboard.
 5. In `index.js` copy and replace __Client_ID__ and __DOMAIN_NAME__ with the values in the settings tab on Auth0 
-6. Switch to the `src` directory and run `npm start` in the command line.
+6. Run `npm start` in the command line to start the application.
 7. Open the web app on the browser.
