@@ -2,7 +2,9 @@
 
 Sample application on building a chat app using Pusher.
 
-# Setup:
+[View tutorial](https://pusher.com/tutorials/secure-chat-javascript)
+
+## Setup
 1. Open the terminal (or command prompt if you're on Windows) and run these commands
 
   ```
@@ -16,3 +18,11 @@ Sample application on building a chat app using Pusher.
 5. In `index.js` copy and replace __Client_ID__ and __DOMAIN_NAME__ with the values in the settings tab on Auth0 
 6. Run `npm start` in the command line to start the application.
 7. Open the web app on the browser.
+
+## Built With
+
+...
+
+## Acknowledgements
+
+...
